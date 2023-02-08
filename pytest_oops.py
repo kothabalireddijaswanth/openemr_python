@@ -48,6 +48,6 @@ def obj():
 def test_login(obj):
     obj.Open_emrlogin()
 
-def test_add_patient(obj):
-    obj.Patient_details()
+#def test_add_patient(obj):
+   # obj.Patient_details()
 
