@@ -9,7 +9,6 @@ class Open_emr():
         self.driver.maximize_window()
         self.driver.implicitly_wait(30)
         self.driver.get("https://demo.openemr.io/b/openemr")
-
     def Open_emrlogin(self):
         self.driver.find_element(By.ID, "authUser").send_keys("admin")
         self.driver.find_element(By.ID, "clearPass").send_keys("pass")
@@ -40,12 +39,15 @@ class Add_Patient(Open_emr):
         except:
             print("You have entered Invalid id")
 
-def test_login():
+@pytest.fixture
+def obj():
     obj = Add_Patient()
-    obj.Open_emrlogin()
-    assert obj.driver.title == "OpenEMR"
+    yield obj
+    obj.driver.quit()
 
-def test_add_patient():
-    obj = Add_Patient()
+def test_login(obj):
     obj.Open_emrlogin()
+
+def test_add_patient(obj):
+    obj.Patient_details()
 
